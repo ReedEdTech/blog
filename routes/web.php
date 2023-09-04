@@ -21,18 +21,22 @@ Route::get('/', function () {
 //value gets passed to function (& named $slug)
 Route::get('posts/{post}', function ( $slug ) {
     //build the file path for this file
-    $path = __DIR__ . "/../resources/posts/{$slug}.html";
+    //$path = __DIR__ . "/../resources/posts/{$slug}.html";
     
-    if( !file_exists( $path ) ){
+    if( !file_exists( $path = __DIR__ . "/../resources/posts/{$slug}.html") ){
         //doesn't exit?  redirect to homepage
         return redirect('/');
     }
     
-    //grab the file
-    $post = file_get_contents( $path );
+    //$post = cache()->remember("posts.{$slug}", now()->addHour(), function() use ($path){
+    //    return file_get_contents( $path );
+    //});
+
+    //inline that function for shorter code
+    $post = cache()->remember("posts.{$slug}", now()->addHour(), fn() => file_get_contents($path) );
+    //cash will remember this file for one hour!
+
     //load the view & instantiate a $post variable for the view to use
-    return view('post', [
-        'post' => $post
-    ]);
+    return view('post', ['post' => $post]);
 })->where('post', '[A-z_\-]+');
 
