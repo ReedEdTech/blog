@@ -7,13 +7,8 @@
 <body>
   
     <article>
-        <h1><a href="/post">My First Post</a></h1>
-
-        <p>
-            words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words
-        </p>
-
-    </article>
+      
+        <?= $post ?>
 
     <a href="/">Go Back</a>
 </body>

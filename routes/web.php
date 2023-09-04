@@ -17,7 +17,22 @@ Route::get('/', function () {
     return view('posts');
 });
 
-Route::get('post', function () {
-    return view('post');
+//{post} is a wildcard
+//value gets passed to function (& named $slug)
+Route::get('posts/{post}', function ( $slug ) {
+    //build the file path for this file
+    $path = __DIR__ . "/../resources/posts/{$slug}.html";
+    
+    if( !file_exists( $path ) ){
+        //doesn't exit?  redirect to homepage
+        return redirect('/');
+    }
+    
+    //grab the file
+    $post = file_get_contents( $path );
+    //load the view & instantiate a $post variable for the view to use
+    return view('post', [
+        'post' => $post
+    ]);
 });
 
