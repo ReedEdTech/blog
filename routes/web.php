@@ -30,7 +30,7 @@ Route::get('posts/{post}', function ( $slug ) {
     //go find the file
     //load the view & instantiate a $post variable for the view to use
     return view('post', [
-        'post' => Post::find( $slug )
+        'post' => Post::findOrFail( $slug )
     ]);
-})->where('post', '[A-z_\-]+');
+});
 
