@@ -13,6 +13,9 @@
                 </a>
             </h1>
             <div>
+                <?= $post->date; ?>
+            </div>
+            <div>
                 <?= $post->excerpt; ?>
             </div>
 
