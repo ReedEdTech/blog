@@ -5,32 +5,12 @@
 
 
 <body>
-  
-    <article>
-        <h1><a href="/posts/my-first-post">My First Post</a></h1>
+    <?php foreach( $posts as $post) : ?>
+        <article>
+            <?= $post; ?>
 
-        <p>
-            words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words
-        </p>
-
-    </article>
-    <article>
-        <h1><a href="/posts/my-second-post">My Second Post</a></h1>
-
-        <p>
-            words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words
-        </p>
-
-    </article>
-
-    <article>
-        <h1><a href="/posts/my-third-post">My Third Post</a></h1>
-
-        <p>
-            words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words words words more words words words words words words words words
-        </p>
-
-    </article>
+        </article>
+    <?php endforeach; ?>
 
 </body>
 
