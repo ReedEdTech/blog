@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use Spatie\YamlFrontMatter\Document;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +15,13 @@ use App\Models\Post;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function () {   
+    
+    //pass those POSTS to the view (clean up the output in the view)
     return view('posts', [
         'posts' => Post::all()
     ]);
+    
 });
 
 //{post} is a wildcard
