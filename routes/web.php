@@ -20,7 +20,8 @@ Route::get('/', function () {
     
     //pass those POSTS to the view (clean up the output in the view)
     return view('posts', [
-        'posts' => Post::all()
+        'posts' => Post::with('category')->get()
+        //'posts' => Post::all()
     ]);
     
 });
