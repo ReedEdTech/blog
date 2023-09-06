@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use App\Models\Category;
 use Spatie\YamlFrontMatter\Document;
 
 /*
@@ -31,6 +32,14 @@ Route::get('posts/{post:slug}', function ( Post $post ) {
     //load the view & instantiate a $post variable for the view to use
     return view('post', [
         'post' => $post
+    ]);
+});
+
+//route for categories view
+Route::get('categories/{category:slug}', function( Category $category ){
+    //reuse the posts view (with a different parameter)
+    return view( 'posts', [
+        'posts' => $category->posts
     ]);
 });
 
