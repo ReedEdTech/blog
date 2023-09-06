@@ -7,12 +7,12 @@
                         {{ $post->title; }}
                     </a>
                 </h1>
-                <div>
-                    <?= $post->date; ?>
-                </div>
-                <div>
+                <p>
+                    <a href="#">[{{ $post->category->name; }}]</a>
+                </p>
+                <p>
                     {{ $post->excerpt; }}
-                </div>
+                </p>
 
             </article>
         @endforeach

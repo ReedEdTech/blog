@@ -2,10 +2,13 @@
 
     <article>
     
-    <h1><?= $post->title; ?></h1>
-            <div>               
+    <h1> {{$post->title;}}</h1>
+            <p>
+                <a href="#">[{{ $post->category->name }}]</a>
+            </p>
+            <p>               
                 {!! $post->body !!}
-            </div>
+            </p>
 
     <a href="/">Go Back</a>
     </article>
