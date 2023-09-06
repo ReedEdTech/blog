@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
 use Spatie\YamlFrontMatter\Document;
 
 /*
@@ -41,6 +42,14 @@ Route::get('categories/{category:slug}', function( Category $category ){
     //reuse the posts view (with a different parameter)
     return view( 'posts', [
         'posts' => $category->posts
+    ]);
+});
+
+//route for posts by a user
+Route::get('userposts/{user:id}', function( User $user ){
+    //reuse the posts view (with a different parameter)
+    return view( 'posts', [
+        'posts' => $user->posts
     ]);
 });
 

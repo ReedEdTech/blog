@@ -8,13 +8,22 @@
                     </a>
                 </h1>
                 <p>
+                    By
+                    <a href="/userposts/{{ $post->user->id; }}">[{{ $post->user->name; }}]</a>
+                     in 
                     <a href="/categories/{{ $post->category->slug; }}">[{{ $post->category->name; }}]</a>
                 </p>
                 <p>
                     {{ $post->excerpt; }}
                 </p>
-
+                
             </article>
         @endforeach
+
+        <p>
+            <br/>
+            <strong><a href="/">Go Home </a></strong>
+        </p>
+
 
 </x-layout>
