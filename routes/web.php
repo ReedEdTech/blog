@@ -26,11 +26,11 @@ Route::get('/', function () {
 
 //{post} is a wildcard
 //value gets passed to function (& named $slug)
-Route::get('posts/{id}', function ( $id ) {
+Route::get('posts/{post:slug}', function ( Post $post ) {
     //go find the file
     //load the view & instantiate a $post variable for the view to use
     return view('post', [
-        'post' => Post::findOrFail( $id )
+        'post' => $post
     ]);
 });
 
