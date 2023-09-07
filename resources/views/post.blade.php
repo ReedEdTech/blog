@@ -5,7 +5,7 @@
     <h1> {{$post->title;}}</h1>
 
         <p>
-            By <a href="/userposts/{{$post->user->id}}">{{$post->user->name}}</a>
+            By <a href="/authors/{{$post->author->username}}">{{$post->author->name}}</a>
         </p>
 
             <p>

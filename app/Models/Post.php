@@ -16,8 +16,12 @@ class Post extends Model
     public function category(){
         return $this->belongsTo( Category::class );
     }
-    public function user(){
-        return $this->belongsTo( User::class );
+
+    //rename this from user to author 
+    public function author(){
+        return $this->belongsTo( User::class , 'user_id');
+        //need 2nd parameter to force mapping to user_id (otherwise, it will be looking for author_id)
+        //now you can talk about $post->author->name (instead of $post->user->name)
     }
 
 }

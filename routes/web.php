@@ -21,7 +21,7 @@ Route::get('/', function () {
     
     //pass those POSTS to the view (clean up the output in the view)
     return view('posts', [
-        'posts' => Post::with('category')->get()
+        'posts' => Post::latest()->with('category', 'author')->get()
         //'posts' => Post::all()
     ]);
     
@@ -46,10 +46,10 @@ Route::get('categories/{category:slug}', function( Category $category ){
 });
 
 //route for posts by a user
-Route::get('userposts/{user:id}', function( User $user ){
+Route::get('authors/{author:username}', function( User $author ){
     //reuse the posts view (with a different parameter)
     return view( 'posts', [
-        'posts' => $user->posts
+        'posts' => $author->posts
     ]);
 });
 
