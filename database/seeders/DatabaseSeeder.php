@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Post;
+use Database\Factories\PostFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,7 +26,28 @@ class DatabaseSeeder extends Seeder
         User::truncate();
         Category::truncate();
         Post::truncate();
+
+        //seed catgories (not using factory!)
+        $names = ['Personal', 'Family', 'Work', 'Hobbies'];
+        $slugs = ['personal', 'family', 'work', 'hobbies'];
+        $categories = [];
+        for( $i=0; $i<count($names); $i+=1){
+            $categories[] = Category::create( ['name'=> $names[$i], 'slug'=>$slugs[$i] ] );
+        }
+
+        for($i=0; $i<10; $i++){
+            //create 10 random users
+            $user = User::factory()->create();
+            //create between 1&5 posts for this user
+            for($p=0; $p<rand(1,5); $p++){
+                Post::factory()->create([
+                    'user_id' => $user->id,
+                    'category_id' => $categories[ rand( 0, count($categories)-1 ) ]
+                ]);
+            }
+        }
                 
+        /*
         $users = [];
         for( $u=0; $u<3; $u++)
             $users[] = User::factory()->create();
@@ -61,7 +83,9 @@ class DatabaseSeeder extends Seeder
                 'excerpt' => $excerpts[$i],
                 'body' => $bodies[$i]
             ]);
+            
         }
+        */
 
         
 
