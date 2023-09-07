@@ -1,6 +1,29 @@
 <x-layout>
 
-        @foreach( $posts as $post)
+
+<!-- header -->
+@include('_posts-header');
+
+        <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+            <!-- MOST RECENT ARTICLE (large display) -->
+            <x-post-featured-card />
+
+            <!-- 2x1 grid with semi-featured articles -->
+            <div class="lg:grid lg:grid-cols-2">
+                <x-post-card />
+                <x-post-card />
+            </div>
+
+            <!-- 3x1 grid of non featured articles -->
+            <div class="lg:grid lg:grid-cols-3">
+               <x-post-card />
+               <x-post-card />
+               <x-post-card />
+            </div>
+        </main>
+
+
+        <!-- @foreach( $posts as $post)
             <article>
                 <h1>
                     <a href="/posts/{{ $post->slug }} ">
@@ -23,7 +46,7 @@
         <p>
             <br/>
             <strong><a href="/">Go Home </a></strong>
-        </p>
+        </p> -->
 
 
 </x-layout>
