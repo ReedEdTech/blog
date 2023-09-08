@@ -27,7 +27,7 @@ Route::get('/', function () {
         'categories' => Category::all()
     ]);
     
-});
+})->name('home');
 
 //{post} is a wildcard
 //value gets passed to function (& named $slug)
@@ -47,7 +47,7 @@ Route::get('categories/{category:slug}', function( Category $category ){
         'currentCategory' => $category,
         'categories' => Category::all()
     ]);
-});
+})->name('category');
 
 //route for posts by a user
 Route::get('authors/{author:username}', function( User $author ){
