@@ -19,11 +19,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {   
+Route::get('/', function () { 
+    //grab all the posts
+    $posts =  Post::latest()->with('category', 'author'); //->get(); <don't get yet.  Might need to narrow down w/search
     
+    //maybe filter the list down 
+    if( request('search') ){ //if there is a search parameter in the query string
+        $posts 
+            ->where('title', 'like', '%' . request('search') . '%' )
+            ->orWhere( 'body', 'like', '%' . request('search') . '%' );
+            //uses SQL syntax:  'like' and wildcard '%'
+    }
+
     //pass those POSTS to the view (clean up the output in the view)
     return view('posts', [
-        'posts' => Post::latest()->with('category', 'author')->get(),
+        'posts' => $posts->get(),
         'categories' => Category::all()
     ]);
     
@@ -57,4 +67,6 @@ Route::get('authors/{author:username}', function( User $author ){
         'categories' => Category::all()
     ]);
 });
+
+
 
