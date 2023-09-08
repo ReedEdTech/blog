@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Category;
 use Spatie\YamlFrontMatter\Document;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,35 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () { 
-    //grab all the posts
-    $posts =  Post::latest()->with('category', 'author'); //->get(); <don't get yet.  Might need to narrow down w/search
-    
-    //maybe filter the list down 
-    if( request('search') ){ //if there is a search parameter in the query string
-        $posts 
-            ->where('title', 'like', '%' . request('search') . '%' )
-            ->orWhere( 'body', 'like', '%' . request('search') . '%' );
-            //uses SQL syntax:  'like' and wildcard '%'
-    }
-
-    //pass those POSTS to the view (clean up the output in the view)
-    return view('posts', [
-        'posts' => $posts->get(),
-        'categories' => Category::all()
-    ]);
-    
-})->name('home');
+Route::get('/', [PostController::class, 'index'] )->name('home');
 
 //{post} is a wildcard
 //value gets passed to function (& named $slug)
-Route::get('posts/{post:slug}', function ( Post $post ) {
-    //go find the file
-    //load the view & instantiate a $post variable for the view to use
-    return view('post', [
-        'post' => $post
-    ]);
-});
+Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 //route for categories view
 Route::get('categories/{category:slug}', function( Category $category ){

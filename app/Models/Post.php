@@ -13,6 +13,18 @@ class Post extends Model
 
     use HasFactory;
 
+    //scopeFilter functions allow you to run queries
+    //Call like this:  Post::newQuery()->filter()
+    public function scopeFilter( $query , array $filters){
+
+        if ( $filters['search'] ?? false ) { //if there is a search parameter in the query string
+            $query
+                ->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('body', 'like', '%' . request('search') . '%');
+                //uses SQL syntax:  'like' and wildcard '%'
+        }
+    }
+
     public function category(){
         return $this->belongsTo( Category::class );
     }
