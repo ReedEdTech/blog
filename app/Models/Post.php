@@ -33,6 +33,13 @@ class Post extends Model
             )
         );
 
+        //is there an author parameter in the query string?
+        $query->when(  $filters['author'] ?? false, fn( $query, $author) =>  
+        $query->whereHas( 'author' , fn($query) => 
+            $query->where( 'username', $author )
+        )
+    );
+
     }
 
     public function category(){

@@ -37,6 +37,7 @@ Route::get('posts/{post:slug}', [PostController::class, 'show']);
 //     ]);
 // })->name('category');
 
+/*   DELETED THIS -> resue the '/' route with ?author=### instead
 //route for posts by a user
 Route::get('authors/{author:username}', function( User $author ){
     //dd($author->posts);
@@ -45,6 +46,7 @@ Route::get('authors/{author:username}', function( User $author ){
         'posts' => $author->posts->load(['category', 'author'])
     ]);
 });
+*/
 
 
 
