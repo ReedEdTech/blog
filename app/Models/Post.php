@@ -17,12 +17,22 @@ class Post extends Model
     //Call like this:  Post::newQuery()->filter()
     public function scopeFilter( $query , array $filters){
 
-        if ( $filters['search'] ?? false ) { //if there is a search parameter in the query string
+        //if there is a search parameter in the query string, call this in-line function        
+        $query->when(  $filters['search'] ?? false, fn($query, $search) =>  
             $query
                 ->where('title', 'like', '%' . request('search') . '%')
-                ->orWhere('body', 'like', '%' . request('search') . '%');
+                ->orWhere('body', 'like', '%' . request('search') . '%')
                 //uses SQL syntax:  'like' and wildcard '%'
-        }
+         );
+
+
+        //if there is a category parameter in the query string, call this in-line function        
+        $query->when(  $filters['category'] ?? false, fn( $query, $category) =>  
+            $query->whereHas( 'category' , fn($query) => 
+                $query->where( 'slug', $category )
+            )
+        );
+
     }
 
     public function category(){

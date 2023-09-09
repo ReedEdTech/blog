@@ -26,15 +26,16 @@ Route::get('/', [PostController::class, 'index'] )->name('home');
 //value gets passed to function (& named $slug)
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
-//route for categories view
-Route::get('categories/{category:slug}', function( Category $category ){
-    //reuse the posts view (with a different parameter)
-    return view( 'posts', [
-        'posts' => $category->posts->load(['category', 'author']),
-        'currentCategory' => $category,
-        'categories' => Category::all()
-    ]);
-})->name('category');
+//route for categories view ->  We REPLACED this by passing the category into the query string,
+// now search by category is handled by the '/' route!
+// Route::get('categories/{category:slug}', function( Category $category ){
+//     //reuse the posts view (with a different parameter)
+//     return view( 'posts', [
+//         'posts' => $category->posts->load(['category', 'author']),
+//         'currentCategory' => $category,
+//         'categories' => Category::all()
+//     ]);
+// })->name('category');
 
 //route for posts by a user
 Route::get('authors/{author:username}', function( User $author ){

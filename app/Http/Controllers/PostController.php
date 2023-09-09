@@ -10,10 +10,12 @@ class PostController extends Controller
 {
     public function index()
     {
-        //dd( request()->only('search'));
+        //dd( request(['search', 'category']) );
+        //dd( Category::all()->where('slug', request('category'))->first());
         //pass those POSTS to the view (clean up the output in the view)
         return view('posts', [
-            'posts' => Post::latest()->filter( request()->only('search') )->get(), //<<that calls the Post.scopeFilter function
+            'posts' => Post::latest()->filter( request(['search', 'category']) )->get(), //<<that calls the Post.scopeFilter function
+            'currentCategory' => Category::firstWhere('slug', request('category')),
             'categories' => Category::all()
         ]);
         // notes:
