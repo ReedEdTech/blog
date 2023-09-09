@@ -13,10 +13,9 @@ class PostController extends Controller
         //dd( request(['search', 'category']) );
         //dd( Category::all()->where('slug', request('category'))->first());
         //pass those POSTS to the view (clean up the output in the view)
-        return view('posts', [
-            'posts' => Post::latest()->filter( request(['search', 'category']) )->get(), //<<that calls the Post.scopeFilter function
-            'currentCategory' => Category::firstWhere('slug', request('category')),
-            'categories' => Category::all()
+        return view('posts.index', [
+            'posts' => Post::latest()->filter( request(['search', 'category']) )->get() //<<that calls the Post.scopeFilter function
+            //'currentCategory' => Category::firstWhere('slug', request('category')) //<<<moved this CategoryDropdown.php
         ]);
         // notes:
         //request()->only('search') return an array like ['search'=>'dkjafjldks']
@@ -26,7 +25,7 @@ class PostController extends Controller
     public function show( Post $post ){
         //go find the file
         //load the view & instantiate a $post variable for the view to use
-        return view('post', [
+        return view('posts.show', [
             'post' => $post
         ]);
     }

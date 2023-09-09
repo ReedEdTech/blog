@@ -39,10 +39,10 @@ Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 //route for posts by a user
 Route::get('authors/{author:username}', function( User $author ){
+    //dd($author->posts);
     //reuse the posts view (with a different parameter)
     return view( 'posts', [
-        'posts' => $author->posts->load(['category', 'author']),
-        'categories' => Category::all()
+        'posts' => $author->posts->load(['category', 'author'])
     ]);
 });
 
