@@ -14,7 +14,10 @@ class PostController extends Controller
         //dd( Category::all()->where('slug', request('category'))->first());
         //pass those POSTS to the view (clean up the output in the view)
         return view('posts.index', [
-            'posts' => Post::latest()->filter( request(['search', 'category', 'author']) )->get() //<<that calls the Post.scopeFilter function
+            //filter() calls the Post.scopeFilter function
+            'posts' => Post::latest()->filter( 
+                request(['search', 'category', 'author']) 
+            )->paginate(6)->withQueryString()
             //'currentCategory' => Category::firstWhere('slug', request('category')) //<<<moved this CategoryDropdown.php
         ]);
         // notes:
