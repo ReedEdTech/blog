@@ -19,10 +19,11 @@ class Post extends Model
 
         //if there is a search parameter in the query string, call this in-line function        
         $query->when(  $filters['search'] ?? false, fn($query, $search) =>  
-            $query
-                ->where('title', 'like', '%' . request('search') . '%')
-                ->orWhere('body', 'like', '%' . request('search') . '%')
-                //uses SQL syntax:  'like' and wildcard '%'
+            $query->where( fn($query) =>
+                 $query->where('title', 'like', '%' . request('search') . '%')
+                    ->orWhere('body', 'like', '%' . request('search') . '%')
+                    //uses SQL syntax:  'like' and wildcard '%'
+            )
          );
 
 
