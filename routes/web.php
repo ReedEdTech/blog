@@ -34,3 +34,7 @@ Route::post( 'register' , [RegisterController::class, 'store'] )->middleware('gu
 
 //logging out
 Route::post( 'logout', [SessionsController::class, 'destroy'] )->middleware('auth');
+
+//logging in
+Route::get( 'login', [SessionsController::class, 'create'] )->middleware('guest');
+Route::post( 'login', [SessionsController::class, 'store'] )->middleware('guest');
