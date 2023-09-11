@@ -30,8 +30,17 @@ class RegisterController extends Controller
         //let's make us a user!
         User::create( $attributes );
 
+        /*
+        //Store this success message to be displayed on the next page load!
+        //   we will display this on our layout.blade.php component
+        session()->flash('success', 'Your account has been created.');
+
         //send them back to the home page
         return redirect('/');
+        */
+        
+        //shorthand for redirect & flash
+        return redirect('/')->with('success', 'Your account has been created.');
 
     }
 

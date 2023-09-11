@@ -56,4 +56,9 @@
             </div>
         </footer>
     </section>
+
+    <!-- Display the flash success message -->
+    <x-flash />
+ 
+
 </body>
