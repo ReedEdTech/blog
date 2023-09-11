@@ -22,6 +22,8 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255',
             'password' => 'required|max:255|min:7'
         ]);
+        //*NOTE:  In User class we overrode the mutator for password
+        //   so this will actually bcrypt the password as it is stored
         
         //dd($attributes);
         //If I made it here, then I passed validation

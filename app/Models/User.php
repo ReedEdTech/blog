@@ -44,6 +44,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    //overriding a mutator
+    //this allows us to snag the password as it comes in & hash it before storing it!
+    public function setPasswordAttribute( $password ){
+        $this->attributes['password'] = bcrypt( $password );
+    }
+
     public function posts(){
         return $this->hasMany( Post::class );
     }
