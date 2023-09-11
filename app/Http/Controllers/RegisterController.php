@@ -28,17 +28,15 @@ class RegisterController extends Controller
         //dd($attributes);
         //If I made it here, then I passed validation
         //let's make us a user!
-        User::create( $attributes );
-
-        /*
-        //Store this success message to be displayed on the next page load!
-        //   we will display this on our layout.blade.php component
-        session()->flash('success', 'Your account has been created.');
-
-        //send them back to the home page
-        return redirect('/');
-        */
+        $user = User::create( $attributes );
         
+        //log the user in
+        auth()->login( $user );
+
+        //Store this success message to be displayed on the next page load!
+        //   we will display this on our layout.blade.php component  
+        //send them back to the home page
+            
         //shorthand for redirect & flash
         return redirect('/')->with('success', 'Your account has been created.');
 
