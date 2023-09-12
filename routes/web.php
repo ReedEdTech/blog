@@ -46,3 +46,6 @@ Route::post( 'posts/{post:slug}/comments', [PostCommentsController::class, 'stor
 
 //playing with mailchimp
 Route::post( 'newsletter' , NewsletterController::class);  //note: no controller function specified.  Calls __invoke() function
+
+//admin stuff
+Route::get('admin/posts/create', [PostController::class, 'create'])->middleware('admin');
