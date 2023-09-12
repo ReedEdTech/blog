@@ -11,6 +11,7 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $guarded =[];
 
     public function post(){
         //don't need a 2nd parameter here because the names match
