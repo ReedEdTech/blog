@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Http\Controllers\NewsletterController;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
@@ -11,6 +10,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\PostCommentsController;
+use App\Services\Newsletter;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,30 +45,4 @@ Route::post( 'posts/{post:slug}/comments', [PostCommentsController::class, 'stor
 
 
 //playing with mailchimp
-Route::post( 'newsletter' , function(){
-    //require_once('/path/to/MailchimpMarketing/vendor/autoload.php');
-    request() ->validate(['email' => 'required|email']);
-    $mailchimp = new \MailchimpMarketing\ApiClient();
-    
-    $mailchimp->setConfig([
-        'apiKey' => config('services.mailchimp.key'),
-        'server' => 'us14'
-    ]);
-    
-    //$response = $mailchimp->ping->get();
-    //$response = $mailchimp->lists->getAllLists();
-    //$response = $mailchimp->lists->getList("cb7acb323a");
-    try{
-        $response = $mailchimp->lists->addListMember("cb7acb323a", [
-            "email_address" => request('email'),
-            "status" => "subscribed",
-        ]);    
-    }
-    catch( \Exception $e){
-        throw \Illuminate\Validation\ValidationException::withMessages([
-            'email' => 'This email could not be added to our newsletter list.'
-        ]);
-    }
-    //ddd($response);
-    return redirect('/')->with( 'success', 'You are now signed up for our newsletter!' );
-});
+Route::post( 'newsletter' , NewsletterController::class);  //note: no controller function specified.  Calls __invoke() function
