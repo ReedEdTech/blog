@@ -42,3 +42,25 @@ Route::post( 'login', [SessionsController::class, 'store'] )->middleware('guest'
 
 //comments
 Route::post( 'posts/{post:slug}/comments', [PostCommentsController::class, 'store'] )->middleware('auth');
+
+//playing with mailchimp
+Route::get( 'ping' , function(){
+    //require_once('/path/to/MailchimpMarketing/vendor/autoload.php');
+
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+    
+    $mailchimp->setConfig([
+        'apiKey' => config('services.mailchimp.key'),
+        'server' => 'us14'
+    ]);
+    
+    //$response = $mailchimp->ping->get();
+    //$response = $mailchimp->lists->getAllLists();
+    //$response = $mailchimp->lists->getList("cb7acb323a");
+    $response = $mailchimp->lists->addListMember("cb7acb323a", [
+        "email_address" => "Shemar56@yahoo.com",
+        "status" => "subscribed",
+    ]);
+
+    ddd($response);
+});
