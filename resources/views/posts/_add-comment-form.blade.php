@@ -7,16 +7,19 @@
             <h2 class="ml-4">Want to participate?</h2>
         </header>
 
-        <div class="mt-5">
+        <x-form.textarea name="body" />
+
+        <x-form.button>Post Comment</x-form.button>
+        <!-- <div class="mt-5">
             <textarea name="body" id="" required class="w-full text-sm focus:outline-none focus:ring" rows="5" placeholder="Quick, think of something to say!"></textarea>
             @error("body")
             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
             @enderror
-        </div>
+        </div> -->
 
-        <div class="flex justify-end mt-6 pt-6 border-t border-gray-200 pt-6">
-            <x-submit-button>Post Comment</x-submit-button>
-        </div>
+        <!-- <div class="flex justify-end mt-6 pt-6 border-t border-gray-200 pt-6">
+            <x-form.button>Post Comment</x-form.button>
+        </div> -->
 
     </form>
 </x-panel>
