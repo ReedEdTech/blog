@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Http\UploadedFile;
 
 class PostController extends Controller
 {
@@ -33,8 +35,32 @@ class PostController extends Controller
         ]);
     }
 
-    public function create( Post $post ){
+    public function create(  ){
         return view( 'posts.create' );
+    }
+
+    public function store( ){
+        //ddd( request() -> all() );
+        $attributes = request()->validate([
+            'title' => 'required',
+            'thumbnail' => 'required',//|image',
+            'excerpt' => 'required',
+            'body' => 'required',
+            'slug' => ['required', Rule::unique('posts','slug')],
+            'category_id' => ['required', Rule::exists('categories', 'id')]
+        ]);
+//ddd(request()->file('thumbnail')->store('thumbnails'));
+
+        $attributes['user_id'] = auth()->user()->id;
+        //store function = store in the 'thumbnails' folder & return the file path (as a string)
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');   
+        
+
+        //dd( $attributes );
+        $post = Post::create($attributes);
+
+        return redirect("/posts/".$post->slug);
+
     }
 
 }

@@ -10,7 +10,8 @@ use App\Models\Comment;
 class Post extends Model
 {
     //protected $guarded = ['id'];
-    protected $fillable=['title','excerpt','body','slug','category_id'];
+    //protected $fillable=['title','excerpt','body','slug','category_id'];
+    protected $guarded = [];
 
     use HasFactory;
 

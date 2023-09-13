@@ -17,10 +17,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
+        /*
         User::truncate();
         Category::truncate();
         Post::truncate();
-
+        */
         //seed catgories (not using factory!)
         $names = ['Personal', 'Family', 'Work', 'Hobbies'];
         $slugs = ['personal', 'family', 'work', 'hobbies'];
@@ -40,6 +41,9 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+        $this->call([ CommentSeeder::class ]);
+
         //\App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

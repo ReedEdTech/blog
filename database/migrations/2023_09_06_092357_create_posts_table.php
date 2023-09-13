@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete(); //links to Categories table            
             $table->string('title');
+            $table->string('thumbnail')->nullable();
             $table->string('slug')->unique();
             $table->text('excerpt');
             $table->text('body');
