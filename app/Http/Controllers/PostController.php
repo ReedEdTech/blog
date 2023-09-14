@@ -12,6 +12,7 @@ class PostController extends Controller
 {
     public function index()
     {
+        //ddd(request()->user()->can('admin'));
         //dd( request(['search', 'category']) );
         //dd( Category::all()->where('slug', request('category'))->first());
         //pass those POSTS to the view (clean up the output in the view)

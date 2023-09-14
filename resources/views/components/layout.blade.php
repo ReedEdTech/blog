@@ -14,6 +14,7 @@
 </style>
 
 <body style="font-family: Open Sans, sans-serif">
+
     <section class="px-6 py-8">
         <nav class="md:flex md:justify-between md:items-center">
             <div>
@@ -28,22 +29,28 @@
                     <a href="/register" class="text-xs font-bold uppercase">Register</a>
                     <a href="/login" class="ml-5 text-xs font-bold uppercase">Log In</a>
                 @else
+                
                     <x-dropdown>
                         <x-slot name="trigger">
                             <button class="text-xs font-bold uppercase">
                                 Welcome, {{ auth()->user()->name }}
                             </button>
                         </x-slot>
-                        @php
-                            $active = request()->is('admin/posts/create');                           
-                        @endphp
-                        <x-dropdown-item href="/admin/posts/create" :active='$active' >New Post</x-dropdown-item>
-                        <x-dropdown-item href="/admin/posts">All Posts</x-dropdown-item>
+
+                        @can('admin')
+                            @php
+                                $active = request()->is('admin/posts/create');                           
+                            @endphp
+                            <x-dropdown-item href="/admin/posts/create" :active='$active' >New Post</x-dropdown-item>
+                            <x-dropdown-item href="/admin/posts">All Posts</x-dropdown-item>
+                        @endcan
+
                         <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">Log Out</x-dropdown-item>
 
                         <form id="logout-form" method="POST" action="/logout" class="hidden">
                             @csrf                            
                         </form>
+
                     </x-dropdown>
                     
 
